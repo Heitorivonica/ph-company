@@ -62,7 +62,7 @@ const projects = [
     name: 'PH Company',
     type: 'Site institucional',
     tag: 'Nosso site',
-    url: 'https://heitorivonica.github.io/ph-company/',
+    url: 'https://ph-company.vercel.app/',
     image: `${import.meta.env.BASE_URL}preview.jpg`,
   },
   { name: 'Projeto Exemplo 02', type: 'E-commerce', tag: 'Em breve' },
