@@ -72,8 +72,9 @@ a { color: inherit; text-decoration: none; }
   position: absolute; inset: 0; margin: auto; width: min(60%, 320px); aspect-ratio: 1;
   border-radius: 50%;
   background: radial-gradient(circle at 35% 30%, #f1d98a, #c9a227 35%, #3a2f08 75%, transparent 76%);
-  filter: blur(1px); opacity: .85;
+  filter: blur(1px); opacity: .85; transition: opacity .6s;
 }
+.orb.off { opacity: 0; }
 .eyebrow { color: var(--gold); font-weight: 500; letter-spacing: .12em; text-transform: uppercase; font-size: .85rem; }
 h1 { font-size: clamp(2.4rem, 5.5vw, 4.4rem); line-height: 1.05; margin: 12px 0 20px; }
 .grad {
@@ -110,6 +111,11 @@ h1 { font-size: clamp(2.4rem, 5.5vw, 4.4rem); line-height: 1.05; margin: 12px 0 
   background: linear-gradient(135deg, #2a2a2a, #1a1a1a 60%, #8a6d12);
   border: 1px solid var(--line);
 }
+.thumb { overflow: hidden; }
+.thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+.project.is-link { display: block; cursor: pointer; }
+.visit { display: inline-block; margin-top: 14px; color: var(--gold-light); font-weight: 600; }
+.project.is-link:hover .visit { text-decoration: underline; }
 .chip {
   position: absolute; top: 44px; right: 44px; font-size: .75rem; font-weight: 600;
   background: var(--gold-grad); padding: 4px 12px; border-radius: 999px; color: #0a0a0a;

@@ -55,7 +55,7 @@ function Hero() {
   )
 }
 
-export default function Scene() {
+export default function Scene({ onReady }) {
   const wrap = useRef()
   const [visible, setVisible] = useState(true)
 
@@ -70,9 +70,10 @@ export default function Scene() {
     <div ref={wrap} style={{ width: '100%', height: '100%' }}>
       <Canvas
         frameloop={visible ? 'always' : 'never'}
-        camera={{ position: [0, 0, 6], fov: 40 }}
+        camera={{ position: [0, 0, 7.5], fov: 40 }}
         dpr={isTouch ? [1, 1.5] : [1, 2]}
         gl={{ antialias: !isTouch, powerPreference: 'high-performance' }}
+        onCreated={onReady}
       >
         <ambientLight intensity={0.4} />
         <Hero />
@@ -92,3 +93,4 @@ export default function Scene() {
     </div>
   )
 }
+

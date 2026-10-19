@@ -58,7 +58,13 @@ const pillars = [
 
 // Exemplos provisórios: troque pelos projetos reais de vocês
 const projects = [
-  { name: 'PH Company', type: 'Site institucional', tag: 'Nosso site' },
+  {
+    name: 'PH Company',
+    type: 'Site institucional',
+    tag: 'Nosso site',
+    url: 'https://heitorivonica.github.io/ph-company/',
+    image: `${import.meta.env.BASE_URL}preview.jpg`,
+  },
   { name: 'Projeto Exemplo 02', type: 'E-commerce', tag: 'Em breve' },
   { name: 'Projeto Exemplo 03', type: 'Landing page', tag: 'Em breve' },
 ]
@@ -66,6 +72,7 @@ const projects = [
 export default function App() {
   const [sent, setSent] = useState(false)
   const showScene = useShowScene()
+  const [sceneReady, setSceneReady] = useState(false)
 
   const onSubmit = (e) => {
     e.preventDefault()
@@ -90,10 +97,10 @@ export default function App() {
       <main>
         <section id="inicio" className="hero">
           <div className="hero-canvas">
-            <div className="orb" aria-hidden="true" />
+            <div className={`orb${sceneReady ? ' off' : ''}`} aria-hidden="true" />
             {showScene && (
               <Suspense fallback={null}>
-                <Scene />
+                <Scene onReady={() => setSceneReady(true)} />
               </Suspense>
             )}
           </div>
@@ -151,14 +158,21 @@ export default function App() {
           <h2>Portfólio</h2>
           <p className="sub">Este site é a nossa vitrine. Veja alguns dos projetos que criamos.</p>
           <div className="grid">
-            {projects.map((p) => (
-              <article key={p.name} className="card project">
-                <div className="thumb" />
-                <span className="chip">{p.tag}</span>
-                <h3>{p.name}</h3>
-                <p>{p.type}</p>
-              </article>
-            ))}
+            {projects.map((p) => {
+              const Wrapper = p.url ? 'a' : 'article'
+              const link = p.url ? { href: p.url, target: '_blank', rel: 'noopener noreferrer' } : {}
+              return (
+                <Wrapper key={p.name} className={`card project${p.url ? ' is-link' : ''}`} {...link}>
+                  <div className="thumb">
+                    {p.image && <img src={p.image} alt={`Prévia do projeto ${p.name}`} loading="lazy" width="960" height="600" />}
+                  </div>
+                  <span className="chip">{p.tag}</span>
+                  <h3>{p.name}</h3>
+                  <p>{p.type}</p>
+                  {p.url && <span className="visit">Visitar site →</span>}
+                </Wrapper>
+              )
+            })}
           </div>
         </section>
 
